@@ -71,7 +71,8 @@ namespace TCPClient
             return num;
         }
 
-        string str = string.Empty;
+        //string str = string.Empty;
+        int str;
         Boolean readflg = false;
 
         /*受信処理*/
@@ -79,18 +80,18 @@ namespace TCPClient
         {
             do
             {
-                str = sr.ReadLine();
-                if (str == null)
+                str = sr.Read();
+                if (str == 0)
                 {
                     break;
                 }
-                //Console.WriteLine(str);
+                Console.Write(str);
                 readflg = true;
             } while (true);
         }
 
         /*データの受信*/
-        public string read()
+        public int read()
         {
             if(readflg)
             {
@@ -98,7 +99,7 @@ namespace TCPClient
                 return str;
             }
             /*受信がなければnullを返す*/
-            return null;
+            return 0;
         }
 
         /*ソケットのクローズ*/

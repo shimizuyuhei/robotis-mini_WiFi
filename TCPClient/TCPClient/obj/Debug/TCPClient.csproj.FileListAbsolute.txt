@@ -10,3 +10,9 @@ C:\Users\shimizu.yuhei\Desktop\TCPClient\TCPClient\obj\Debug\TCPClient.pdb
 C:\Users\shimizu.yuhei\Desktop\TCPClient\TCPClient\bin\Debug\TCPClient.exe
 C:\Users\shimizu.yuhei\Desktop\TCPClient\TCPClient\bin\Debug\TCPClient.pdb
 C:\Users\shimizu.yuhei\Desktop\TCPClient\TCPClient\obj\Debug\TCPClient.csprojResolveAssemblyReference.cache
+C:\HAL\4\GP41\RandD\git\robotis-mini_WiFi\TCPClient\TCPClient\bin\Debug\TCPClient.exe.config
+C:\HAL\4\GP41\RandD\git\robotis-mini_WiFi\TCPClient\TCPClient\obj\Debug\TCPClient.exe
+C:\HAL\4\GP41\RandD\git\robotis-mini_WiFi\TCPClient\TCPClient\obj\Debug\TCPClient.pdb
+C:\HAL\4\GP41\RandD\git\robotis-mini_WiFi\TCPClient\TCPClient\bin\Debug\TCPClient.exe
+C:\HAL\4\GP41\RandD\git\robotis-mini_WiFi\TCPClient\TCPClient\bin\Debug\TCPClient.pdb
+C:\HAL\4\GP41\RandD\git\robotis-mini_WiFi\TCPClient\TCPClient\obj\Debug\TCPClient.csprojResolveAssemblyReference.cache

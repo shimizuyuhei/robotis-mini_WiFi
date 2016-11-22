@@ -1,8 +1,8 @@
 #include <ESP8266WiFi.h>
 
 /*アクセスポイント情報 host:192.168.4.1 */
-const char *ssid = "ESPap";
-const char *password = "thereisnospoon";
+const char *ssid = "WROOM-02";
+const char *password = "DarwinMini";
 /*ポート設定*/
 WiFiServer server(55555);
 
@@ -31,12 +31,13 @@ void loop() {
   //Serial.println("conected");
   while(client.connected())
   { 
+    
     TCPread();
     
     //送信処理
     // This will send the request to the server
-    
-    client.print("abc\n"); 
+    TCPsend();
+    //client.println("abc");
     //client.flush();  
   }
   Serial.println("closing connection");
@@ -69,7 +70,19 @@ void TCPread()
       dataH = 0;
       dataL = 0;
     }
-    
-    //Serial.print(data[i],HEX);
   }
+}
+
+void TCPsend()
+{
+  char data;
+  
+  //改行コードを入れて送信  
+  while(Serial.available()){
+    data = Serial.read();
+    client.print(data);
+   //client.print(0x35); 
+  }
+   //client.print("adfsdf\n"); 
+  //client.flush();
 }
