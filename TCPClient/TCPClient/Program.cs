@@ -18,20 +18,25 @@ namespace TCPClient
             Cl.Send(data);
             System.Threading.Thread.Sleep(500);
 
-            byte[] data1 = { 0xff, 0x6b, 0x09, 0x01, 0x03, 0x64, 0x64, 0xc8, 0x57 };
+            byte[] data1 = { 0xff, 0x6b, 0x09, 0x01, 0x03, 0x64, 0x00, 0x64, 0x9f };
 
-            
+            byte[] data2 = { 0xff, 0x6b, 0x09, 0x01, 0x03, 0x64, 0x64, 0xc8, 0x57 };
 
+            Cl.Send(data1);
+            Cl.Send(data2);
             while (true)
             {
-                Cl.Send(data1);
-                String s;
-                /*s = Cl.read();
                 
+                byte[] s;
+                s = Cl.read();
+
                 if (s != null)
                 {
-                    Console.WriteLine(s);
-                }*/
+                    for (int i = 0; s[i] != '\n'; i++)
+                    {
+                        Console.WriteLine(s[i]);
+                    }
+                }
                 
                 System.Threading.Thread.Sleep(500);
             }

@@ -1,8 +1,8 @@
 #include <ESP8266WiFi.h>
 
 /*アクセスポイント情報 host:192.168.4.1 */
-const char *ssid = "WROOM-02";
-const char *password = "DarwinMini";
+const char *ssid = "wroom";
+const char *password = "robotismini";
 /*ポート設定*/
 WiFiServer server(55555);
 
@@ -76,12 +76,14 @@ void TCPread()
 void TCPsend()
 {
   char data;
+  char dataHL[3] = {0,0,'\n'};
   
   //改行コードを入れて送信  
   while(Serial.available()){
     data = Serial.read();
-    client.print(data);
-   //client.print(0x35); 
+    dataHL[0] = (char)((data >> 4) + 0x10);
+    dataHL[1] = (char)((data & 0x0f) + 0x20);
+    client.print(dataHL); 
   }
    //client.print("adfsdf\n"); 
   //client.flush();

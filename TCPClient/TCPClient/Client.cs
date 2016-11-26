@@ -9,6 +9,21 @@ using System.IO;
 using System.Net;
 using System.Net.Sockets;
 
+/**********************************************/
+/* WROOM-02とのTCPソケット通信用クラス        */
+/*                                            */
+/* WROOM-02をアクセスポイントとサーバーとして */
+/* 動作させてC#側のクライアントプログラムで   */
+/* ソケット通信を行う                         */
+/*                                            */
+/* WROOM-02仕様　　　　　　　　　　　　　　　 */
+/* IPアドレス:192.168.4.1                     */
+/* ポート番号:55555                           */
+/* SSID:wroom                                 */
+/* PASSWORD:robotismini                       */
+/*                                            */
+/**********************************************/
+
 namespace TCPClient
 {
     class Client
@@ -72,34 +87,72 @@ namespace TCPClient
         }
 
         //string str = string.Empty;
-        int str;
+        byte[] ReadData = new byte[1024];
         Boolean readflg = false;
+        byte dataH;
+        byte dataL;
 
         /*受信処理*/
         private void Recive()
         {
+            int cnt = 0;
+            byte str;
+
             do
             {
-                str = sr.Read();
+                str = (byte)sr.Read();
                 if (str == 0)
                 {
                     break;
                 }
-                Console.Write(str);
-                readflg = true;
+
+                SetData(cnt, str);
+                if (str != '\n')
+                {
+                    cnt++;
+                }
+                else
+                {
+                    if(cnt != 0)
+                    {
+                        ReadData[cnt] = str;
+                    }
+                    cnt = 0;
+                    readflg = true;
+                }
             } while (true);
         }
 
+        private void SetData(int cnt,byte data)
+        {
+
+            if ((data & 0x10) == 0x10)
+            {
+                dataH = data;
+            }
+            else if ((data & 0x20) == 0x20)
+            {
+                dataL = data;
+            }
+
+            if (dataH != 0 && dataL != 0)
+            {
+                ReadData[cnt] = (byte)((dataH << 4) | (dataL & 0x0f));
+                dataH = 0;
+                dataL = 0;
+            }
+        }
+
         /*データの受信*/
-        public int read()
+        public byte[] read()
         {
             if(readflg)
             {
                 readflg = false;
-                return str;
+                return ReadData;
             }
             /*受信がなければnullを返す*/
-            return 0;
+            return null;
         }
 
         /*ソケットのクローズ*/
